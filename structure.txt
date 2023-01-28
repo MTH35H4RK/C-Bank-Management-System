@@ -1,0 +1,7 @@
+Bank account:
+     account number integer
+     account name char
+     balance float
+
+
+     
