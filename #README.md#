@@ -1,0 +1,46 @@
+Bank Management System
+This project simulates a simple banking system with credit and debit in bank accounts. The project is implemented in C language and uses file handling to store data and user information. The following basic operations are supported:
+
+Credit
+Debit
+Check balance
+Close account
+Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+Prerequisites
+A C compiler
+A text editor
+Installing
+Clone the repository to your local machine:
+
+bash
+Copy code
+git clone https://github.com/[username]/bank-management-system.git
+Open the main.c file in a text editor and compile it using a C compiler.
+
+Usage
+The program will prompt the user to choose an operation to perform. The user can choose from the following operations:
+
+Credit
+Debit
+Check balance
+Close account
+After the operation is performed, the user will be prompted to choose another operation or exit the program.
+
+File Handling
+The program uses file handling to store the data and user information. The data is stored in a binary file using the fwrite function and read from the file using the fread function.
+
+Error Handling
+The program includes error handling for cases where the file cannot be opened or read from. In such cases, an error message is displayed and the program continues to run.
+
+Built With
+C language
+File handling in C
+Contributing
+Feel free to contribute to this project by submitting a pull request.
+
+Author
+[Your Name]
+License
+This project is licensed under the [License].
