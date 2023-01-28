@@ -1,0 +1,121 @@
+#include <string.h>
+#include <stdio.h>
+
+struct BankAccount {
+  int accountNumber;
+  char accountName[50];
+  float balance;
+};
+
+void credit(struct BankAccount *account, float amount) {
+  account->balance += amount;
+
+}
+
+void debit(struct BankAccount *account, float amount) {
+  if (account->balance >= amount) {
+    account->balance -= amount;
+  } else {
+    printf("Insufficient balance\n");
+  }
+}
+
+void checkBalance(struct BankAccount account) {
+  printf("Account Name: %s\n", account.accountName);
+  printf("Account Balance: %.2f\n", account.balance);
+}
+
+void closeAccount(struct BankAccount *account) {
+  account->balance = 0;
+  account->accountNumber = -1;
+  strcpy(account->accountName, "");
+}
+
+void writeToFile(struct BankAccount account) {
+  FILE *fp;
+  fp = fopen("bank_accounts.dat", "ab");
+  if (fp == NULL) {
+    printf("Error opening file\n");
+    return;
+  }
+  fwrite(&account, sizeof(struct BankAccount), 1, fp);
+  fclose(fp);
+}
+
+struct BankAccount readFromFile(int accountNumber) {
+  struct BankAccount account;
+  FILE *fp;
+  fp = fopen("bank_accounts.dat", "rb");
+  if (fp == NULL) {
+    printf("Error opening file\n");
+    account.accountNumber = -1;
+    return account;
+  }
+  while (fread(&account, sizeof(struct BankAccount), 1, fp)) {
+    if (account.accountNumber == accountNumber) {
+      fclose(fp);
+      return account;
+    }
+  }
+  fclose(fp);
+  account.accountNumber = -1;
+  return account;
+}
+
+
+int main() {
+  int choice;
+  int account_number;
+  float amount;
+
+  printf("1. Credit\n");
+  printf("2. Debit\n");
+  printf("3. Check balance\n");
+  printf("4. Close account\n");
+  printf("Enter your choice: ");
+  scanf("%d", &choice);
+
+  switch(choice) {
+    case 1:
+      printf("Enter account number: ");
+      scanf("%d", &account_number);
+      printf("Enter amount: ");
+      scanf("%f", &amount);
+      struct BankAccount account = readFromFile(account_number);
+      if (account.accountNumber == -1) {
+        printf("Error: Invalid account number\n");
+        break;
+      }
+      credit(&account, amount);
+      writeToFile(account);
+      break;
+    case 2:
+      printf("Enter account number: ");
+      scanf("%d", &account_number);
+      printf("Enter amount: ");
+      scanf("%f", &amount);
+      struct BankAccount account = readFromFile(account_number);
+      if (account.accountNumber == -1) {
+printf("Error: Invalid account number\n");
+return 0;
+}
+
+switch(choice) {
+case 1:
+credit(&account, amount);
+writeToFile(account);
+break;
+case 2:
+debit(&account, amount);
+writeToFile(account);
+break;
+case 3:
+checkBalance(account);
+break;
+case 4:
+closeAccount(&account);
+writeToFile(account);
+break;
+}
+
+return 0;
