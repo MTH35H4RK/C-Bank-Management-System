@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bank_functions.h"
-
+#include "bank_functions.h"
 int main() {
   int choice;
   int exit = 0;
@@ -16,7 +16,7 @@ int main() {
     scanf("%d", &choice);
     switch (choice) {
       case 1:
-        create_account();
+        createAccount();
         break;
       case 2:
         deposit();
@@ -25,7 +25,7 @@ int main() {
         withdraw();
         break;
       case 4:
-        check_balance();
+        checkBalance();
         break;
       case 5:
         exit = 1;
